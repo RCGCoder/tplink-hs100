@@ -37,19 +37,36 @@ app.get('/plugs/:deviceId', function (req, res) {
 
 app.get('/plugs/:deviceId/on', function (req, res) {
   logger.info('[API][Plugs][On]  - turn on device', req.params.deviceId);
-
-  client.turnOnByDeviceId(req.params.deviceId).then((info) => {
-    res.send(info);
-  });
+  if (req.params.deviceId.indexOf(".")>0){
+	  const Hs100Api = require('hs100-api');
+	  const auxClient = new Hs100Api.Client();
+	  const auxPlug = auxClient.getDevice({host: req.params.deviceId}).then((device)=>{
+	    device.getSysInfo().then(console.log);
+	    device.setPowerState(true);
+	  });	   
+  } else {
+	  client.turnOnByDeviceId(req.params.deviceId).then((info) => {
+	    res.send(info);
+	  });
+  }
 });
 
 app.get('/plugs/:deviceId/off', function (req, res) {
   logger.info('[API][Plugs][Off] - turn off device', req.params.deviceId);
-
-  client.turnOffByDeviceId(req.params.deviceId).then((info) => {
-    res.send(info);
-  });
+  if (req.params.deviceId.indexOf(".")>0){
+	  const Hs100Api = require('hs100-api');
+	  const auxClient = new Hs100Api.Client();
+	  const auxPlug = auxClient.getDevice({host: req.params.deviceId}).then((device)=>{
+	    device.getSysInfo().then(console.log);
+	    device.setPowerState(false);
+	  });	   
+  } else {
+	  client.turnOffByDeviceId(req.params.deviceId).then((info) => {
+	    res.send(info);
+	  });
+  }
 });
+
 
 app.listen(3000, () => {
   logger.info('[API] - listening on port 3000');
