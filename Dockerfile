@@ -20,5 +20,5 @@ RUN npm install
 #HEALTHCHECK exit 0 
 #   CMD curl --fail http://localhost:3000/health || exit 1
 
-CMD [ "npm", "start" ] 
+#CMD [ "npm", "start" ] 
 
