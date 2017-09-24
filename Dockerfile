@@ -14,7 +14,7 @@ RUN apk add curl nodejs nodejs-npm wget
 RUN mkdir -p /usr/src/app
 
 WORKDIR /usr/src/app
-#RUN wget https://raw.githubusercontent.com/RCGCoder/tplink-hs100/master/tplink-hub/package.json
+RUN wget https://raw.githubusercontent.com/RCGCoder/tplink-hs100/master/tplink-hub/package.json
 #RUN npm install
 
 #HEALTHCHECK  exit 0 
