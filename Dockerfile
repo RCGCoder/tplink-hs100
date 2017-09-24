@@ -15,10 +15,9 @@ RUN mkdir -p /usr/src/app
 
 WORKDIR /usr/src/app
 RUN wget https://raw.githubusercontent.com/RCGCoder/tplink-hs100/master/tplink-hub/package.json
-#RUN npm install
+RUN npm install
 
-#HEALTHCHECK  exit 0 
-#   CMD curl --fail http://localhost:3000/health || exit 1
+HEALTHCHECK CMD curl --fail http://localhost:3000/health || exit 1
 
-#CMD [ "npm", "start" ] 
+CMD [ "npm", "start" ] 
 
