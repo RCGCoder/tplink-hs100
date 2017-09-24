@@ -30,8 +30,7 @@ RUN wget https://raw.githubusercontent.com/RCGCoder/tplink-hs100/master/tplink-h
 
 WORKDIR /usr/src/app
 
-#HEALTHCHECK exit 0 
-#   CMD curl --fail http://localhost:3000/health || exit 1
+HEALTHCHECK CMD curl --fail http://localhost:3000/health || exit 1
 
-#CMD [ "npm", "start" ] 
+CMD [ "npm", "start" ] 
 
