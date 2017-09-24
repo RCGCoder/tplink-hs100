@@ -40,10 +40,9 @@ app.get('/plugs/:deviceId/on', function (req, res) {
   if (req.params.deviceId.indexOf(".")>0){
 	  const Hs100Api = require('hs100-api');
 	  const auxClient = new Hs100Api.Client();
-	  const auxPlug = auxClient.getPlug({host: req.params.deviceId}).then((device)=>{
-	    device.getSysInfo().then(console.log);
-	    device.setPowerState(true);
-	  });	   
+	  const auxPlug = auxClient.getPlug({host: req.params.deviceId});
+	  auxPlug.getSysInfo().then(console.log);
+	  auxPlug.setPowerState(true);
   } else {
 	  client.turnOnByDeviceId(req.params.deviceId).then((info) => {
 	    res.send(info);
@@ -56,10 +55,9 @@ app.get('/plugs/:deviceId/off', function (req, res) {
   if (req.params.deviceId.indexOf(".")>0){
 	  const Hs100Api = require('hs100-api');
 	  const auxClient = new Hs100Api.Client();
-	  const auxPlug = auxClient.getPlug({host: req.params.deviceId}).then((device)=>{
-	    device.getSysInfo().then(console.log);
-	    device.setPowerState(false);
-	  });	   
+	  const auxPlug = auxClient.getPlug({host: req.params.deviceId});
+	  auxPlug.getSysInfo().then(console.log);
+	  auxPlug.setPowerState(false);
   } else {
 	  client.turnOffByDeviceId(req.params.deviceId).then((info) => {
 	    res.send(info);
