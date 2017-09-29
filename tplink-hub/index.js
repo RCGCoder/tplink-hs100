@@ -70,7 +70,7 @@ app.get('/plugs/:deviceId/off', function (req, res) {
 
 const { spawn } = require('child_process');
 const ls = spawn('kodi-send --host=192.168.100.11 --action="ActivateScreenSaver"', []);
-
+ 
 ls.stdout.on('data', (data) => {
   console.log(`stdout: ${data}`);
 });
