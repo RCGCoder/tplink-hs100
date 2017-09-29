@@ -34,5 +34,5 @@ WORKDIR /usr/src/app
 
 #HEALTHCHECK CMD curl --fail http://localhost:3000/health || exit 1
 
-CMD [ "npm", "start" ] 
+#CMD [ "npm", "start" ] 
 
