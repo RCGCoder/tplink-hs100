@@ -19,7 +19,7 @@ RUN mkdir -p /usr/src/app/src/config
 
 
 WORKDIR /usr/src/app
-RUN npm install git://github.com/tillbaks/node-xbmc.git#master
+RUN npm install xbmc
 RUN wget https://raw.githubusercontent.com/RCGCoder/tplink-hs100/master/tplink-hub/package.json
 RUN wget https://raw.githubusercontent.com/RCGCoder/tplink-hs100/master/tplink-hub/index.js
 RUN npm install
