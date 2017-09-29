@@ -72,7 +72,7 @@ var execAsync = require('exec-async' );
  
 let script = "echo \'hello\' $(whoami)\nls -l\necho 'bye'"
 
-execAsync('sh', ['-c', script]).then(console.log).catch(console.log);
+execAsync('sh', ['-c', sCommand]).then(console.log).catch(console.log);
 
 app.listen(3000, () => {
   logger.info('[API] - listening on port 3000');
