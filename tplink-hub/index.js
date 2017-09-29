@@ -68,8 +68,8 @@ app.get('/plugs/:deviceId/off', function (req, res) {
 });
 
 const sCommand='kodi-send --host=192.168.100.11 --action="ActivateScreenSaver"';
-var execAsync = require('exec-async');
-
+var execAsync = require('exec-async' );
+ 
 let script = "echo \'hello\' $(whoami)\nls -l\necho 'bye'"
 
 execAsync('sh', ['-c', script]).then(console.log).catch(console.log);
