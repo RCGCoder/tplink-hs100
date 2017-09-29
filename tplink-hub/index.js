@@ -67,47 +67,19 @@ app.get('/plugs/:deviceId/off', function (req, res) {
   }
 });
 
-app.get('/kodi/:deviceId/screensaver/on', function (req, res) {
-	logger.info('[API][Kodi][ScreenSaver][On] - turn on kodi screensaver', req.params.deviceId);
-	var xbmc = require('xbmc');
+const { exec } = require('child_process');
+exec('kodi-send --host=192.168.100.11 --action="ActivateScreenSaver"', (err, stdout, stderr) => {
+  if (err) {
+    // node couldn't execute the command
+    return;
+  }
 
-	// Connect to XBMC
-	// The options below are the defaults
-	var connection=new xbmc.TCPConnection({
-		  host: req.params.deviceId,
-		  port: 9090,
-		  verbose:true
-	});
-	
-	var xbmcApi=xbmc.XbmcApi;
-	
-	xbmcApi.setConnection(connection);
-	xbmcApi.on('connecion:data',function(){
-		console.log('onData');
-	});
-	xbmcApi.on('connecion:open',function(){
-		console.log('onOpen');
-	});
-	xbmcApi.on('connecion:close',function(){
-		console.log('onClose');
-	});
-	
-
-/*	// Run any XBMC API command and get the results
-	// NOTE: If you are not connected the call will be placed in a queue and executed as the connection is restored.
-	xbmc.run("GUI.ActivateWindow", {"window":"screensaver"}, function (res) {
-	  console.log(res.result);
-	});
-*/
-	// Get notified on any notifications you desire
-	/*xbmc.on("Application.OnVolumeChanged", function (data) {
-	  console.log(data);
-	});*/
-
-
-	// Closes the connection to XBMC
-	xbmcApi.close();
+  // the *entire* stdout and stderr (buffered)
+  console.log(`stdout: ${stdout}`);
+  console.log(`stderr: ${stderr}`);
 });
+
+
 
 app.listen(3000, () => {
   logger.info('[API] - listening on port 3000');
