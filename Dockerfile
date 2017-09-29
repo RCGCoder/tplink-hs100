@@ -19,10 +19,10 @@ RUN mkdir -p /usr/src/app/src/config
 
 
 WORKDIR /usr/src/app
-RUN npm install xbmc
 RUN wget https://raw.githubusercontent.com/RCGCoder/tplink-hs100/master/tplink-hub/package.json
 RUN wget https://raw.githubusercontent.com/RCGCoder/tplink-hs100/master/tplink-hub/index.js
 RUN npm install
+RUN npm install xbmc
 
 WORKDIR /usr/src/app/src/tplink
 RUN wget https://raw.githubusercontent.com/RCGCoder/tplink-hs100/master/tplink-hub/src/tplink/index.js

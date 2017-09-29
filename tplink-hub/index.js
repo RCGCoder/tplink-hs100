@@ -73,39 +73,40 @@ app.get('/kodi/:deviceId/screensaver/on', function (req, res) {
 
 	// Connect to XBMC
 	// The options below are the defaults
-	xbmc.connect({
-	  host: req.params.deviceId,
-	  port: 9777,
-	  reconnect: true,
-	  reconnect_sleep: 30000
+	var connection=new xbmc.TCPConnection({
+		  host: req.params.deviceId,
+		  port: 9090,
+		  verbose:true
 	});
-
-	// Lets you know when we are connected
-	xbmc.on('connect', function () {
-	  console.log("connected to xbmc!");
+	
+	var xbmcApi=xbmc.XbmcApi;
+	
+	xbmcApi.setConnection(connection);
+	xbmcApi.on('connecion:data',function(){
+		console.log('onData');
 	});
+	xbmcApi.on('connecion:open',function(){
+		console.log('onOpen');
+	});
+	xbmcApi.on('connecion:close',function(){
+		console.log('onClose');
+	});
+	
 
-	// Run any XBMC API command and get the results
+/*	// Run any XBMC API command and get the results
 	// NOTE: If you are not connected the call will be placed in a queue and executed as the connection is restored.
 	xbmc.run("GUI.ActivateWindow", {"window":"screensaver"}, function (res) {
 	  console.log(res.result);
 	});
-
+*/
 	// Get notified on any notifications you desire
 	/*xbmc.on("Application.OnVolumeChanged", function (data) {
 	  console.log(data);
 	});*/
 
-	// Changes connection options
-	xbmc.setOptions({
-	  host: req.params.deviceId,
-	  port: 9777,
-	  reconnect: true,
-	  reconnect_sleep: 30000
-	});
 
 	// Closes the connection to XBMC
-	xbmc.close();
+	xbmcApi.close();
 });
 
 app.listen(3000, () => {
