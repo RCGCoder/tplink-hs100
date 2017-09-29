@@ -75,7 +75,7 @@ app.get('/kodi/:deviceId/screensaver/on', function (req, res) {
 	// The options below are the defaults
 	xbmc.connect({
 	  host: req.params.deviceId,
-	  port: 9090,
+	  port: 9777,
 	  reconnect: true,
 	  reconnect_sleep: 30000
 	});
@@ -99,7 +99,7 @@ app.get('/kodi/:deviceId/screensaver/on', function (req, res) {
 	// Changes connection options
 	xbmc.setOptions({
 	  host: req.params.deviceId,
-	  port: 9090,
+	  port: 9777,
 	  reconnect: true,
 	  reconnect_sleep: 30000
 	});
