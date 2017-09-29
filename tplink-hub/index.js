@@ -67,16 +67,7 @@ app.get('/plugs/:deviceId/off', function (req, res) {
   }
 });
 
-const util = require('util');
-const exec = util.promisify(require('child_process').exec);
-
-var ls=function() {
-  exec('ls');
-}
-ls();
-
-/*
-const  exec = require('child_process');
+const  {exec} = require('child_process');
 exec('kodi-send --host=192.168.100.11 --action="ActivateScreenSaver"', (err, stdout, stderr) => {
   if (err) {
     // node couldn't execute the command
@@ -87,7 +78,6 @@ exec('kodi-send --host=192.168.100.11 --action="ActivateScreenSaver"', (err, std
   console.log(`stdout: ${stdout}`);
   console.log(`stderr: ${stderr}`);
 });
-*/
 
 
 app.listen(3000, () => {
