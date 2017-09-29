@@ -10,7 +10,8 @@ ENV DEBIAN_FRONTEND noninteractive
 
 RUN apk update 
 RUN apk apk upgrade
-RUN apk add curl nodejs nodejs-npm wget
+RUN apk add curl nodejs nodejs-npm wget git mc
+
 RUN mkdir -p /usr/src/app
 RUN mkdir -p /usr/src/app/src
 RUN mkdir -p /usr/src/app/src/tplink
@@ -18,6 +19,7 @@ RUN mkdir -p /usr/src/app/src/config
 
 
 WORKDIR /usr/src/app
+RUN npm install git://github.com/tillbaks/node-xbmc.git#master
 RUN wget https://raw.githubusercontent.com/RCGCoder/tplink-hs100/master/tplink-hub/package.json
 RUN wget https://raw.githubusercontent.com/RCGCoder/tplink-hs100/master/tplink-hub/index.js
 RUN npm install
@@ -30,7 +32,7 @@ RUN wget https://raw.githubusercontent.com/RCGCoder/tplink-hs100/master/tplink-h
 
 WORKDIR /usr/src/app
 
-HEALTHCHECK CMD curl --fail http://localhost:3000/health || exit 1
+#HEALTHCHECK CMD curl --fail http://localhost:3000/health || exit 1
 
 CMD [ "npm", "start" ] 
 
