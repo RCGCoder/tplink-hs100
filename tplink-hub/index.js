@@ -77,7 +77,7 @@ app.get('/kodi/:deviceId/screensaver/on', function (req, res) {
 	  host: req.params.deviceId,
 	  port: 8080,
 	  reconnect: true,
-	  reconnect_sleep: 3000
+	  reconnect_sleep: 30000
 	});
 
 	// Lets you know when we are connected
@@ -97,15 +97,15 @@ app.get('/kodi/:deviceId/screensaver/on', function (req, res) {
 	});*/
 
 	// Changes connection options
-	/*xbmc.setOptions({
-	  host: "localhost",
+	xbmc.setOptions({
+	  host: req.params.deviceId,
 	  port: 9090,
 	  reconnect: true,
 	  reconnect_sleep: 30000
-	});*/
+	});
 
 	// Closes the connection to XBMC
-//	xbmc.close();
+	xbmc.close();
 });
 
 app.listen(3000, () => {
