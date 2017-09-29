@@ -71,7 +71,7 @@ const util = require('util');
 const exec = util.promisify(require('child_process').exec);
 
 var ls=function() {
-  const { stdout, stderr } = await exec('ls');
+  (stdout, stderr) = await exec('ls');
   console.log('stdout:', stdout);
   console.log('stderr:', stderr);
 }
