@@ -67,22 +67,12 @@ app.get('/plugs/:deviceId/off', function (req, res) {
   }
 });
 
+const sCommand='kodi-send --host=192.168.100.11 --action="ActivateScreenSaver"';
+var execAsync = require('exec-async');
 
-const { spawn } = require('child_process');
-const ls = spawn('kodi-send --host=192.168.100.11 --action="ActivateScreenSaver"', []);
- 
-ls.stdout.on('data', (data) => {
-  console.log(`stdout: ${data}`);
-});
+let script = "echo \'hello\' $(whoami)\nls -l\necho 'bye'"
 
-ls.stderr.on('data', (data) => {
-  console.log(`stderr: ${data}`);
-});
-
-ls.on('close', (code) => {
-  console.log(`child process exited with code ${code}`);
-});
-
+execAsync('sh', ['-c', script]).then(console.log).catch(console.log);
 
 app.listen(3000, () => {
   logger.info('[API] - listening on port 3000');
